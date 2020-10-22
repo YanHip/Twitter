@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+import traceback
 #from flask_login import LoginManager
 
 app = Flask(__name__)
@@ -49,16 +50,18 @@ class MessageModel(db.Model):
 @app.route('/home', methods=['GET', 'POST'])  # this sets the route to this page
 def home():
     result = MessageModel.query.all()
-    if request.method == 'POST':
-        print(request.form.get('message'))
-        print(request.form.get('test'))
-        #print(format(request.form['message']))
-        #print(request.form['message'])
-        #message = MessageModel(request.form['message'])
-        #db.session.add(message)
-        #db.session.commit()
-    else:
-        print('ss')
+    try:
+
+        if request.method == 'POST':
+            print(request.form['message'])
+
+            message = MessageModel(message=request.form['message'])
+            db.session.add(message)
+            db.session.commit()
+        else:
+            print('ss')
+    except:
+        print(traceback.format_exc())
 
     return render_template('home.html', madata=result)  # some basic inline html
 
