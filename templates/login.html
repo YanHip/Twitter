@@ -1,0 +1,30 @@
+<html>
+
+<head>
+    <title>Mini-Twitter</title>
+    <link rel="icon" href="{{url_for('static', filename = 'img/icon.png')}}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{url_for('static', filename = 'css/bootstrap.min.css')}}" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container" style="text-align: center; width: 20%;">
+        <h1>Login Page</h1>
+        <br>
+        <form action="" method="post">
+            <label> Username : </label><br>
+            <input class="form-control" type="text" placeholder="Username" name="username" value="{{
+          request.form.username }}"><br>
+            <label> Password : </label> <br>
+            <input class="form-control" type="password" placeholder="Password" name="password" value="{{
+          request.form.password }}"><br>
+            <input class="btn btn-default" type="submit" value="Login">
+        </form>
+        {% if error %}
+        <div class="alert alert-danger" role="alert">
+            Error: {{ error }} {% endif %}
+        </div>
+    </div>
+</body>
+
+</html>

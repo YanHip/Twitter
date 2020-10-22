@@ -1,0 +1,53 @@
+<html>
+
+<head>
+    <title>Mini-Twitter</title>
+    <link rel="icon" href="{{url_for('static', filename = 'img/icon.png')}}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{url_for('static', filename = 'css/bootstrap.min.css')}}" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <img src='./static/img/icon.png' style="width : 2%; height: 2%;" />
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/home">Home </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/myfriends">Mes Amis</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/privatemsg"> Message Privée</a>
+                </li>
+            </ul>
+            <form action="/login" method="get" class="form-inline my-2 my-lg-0" style="margin">
+                <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Déconnexion</button>
+            </form>
+        </div>
+    </nav>
+    <div class="container" style="text-align: center;">
+        <div id="write_message">
+            <form action="" method="post" class="form-inline my-2 my-lg-0" style="text-align: center;">
+                <label> Saississer un message </label> <br>
+                <input type="text" name="test">
+                <textarea id="textarea_message" class="form-control" name="message" value="{{
+          request.form.message }}" cols="100" style="display: block; margin-top:2%; margin-left: auto; margin-right: auto;"></textarea>
+                 <input class="btn btn-default" type="submit" value="publier">
+            </form>
+        </div>
+        <div id="list_message">
+            {% for item in madata %}
+            <p> {{ item.message }}</p>
+            {% endfor %} {% if error %}
+            <p class="error"><strong>Error:</strong> {{ error }} {% endif %}
+        </div>
+    </div>
+</body>
+
+</html>
